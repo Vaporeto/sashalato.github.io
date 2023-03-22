@@ -11,7 +11,7 @@ navBtn.click(function() {
         menu.css("pointer-events", "none");
         menu.css("z-index", "50");
         menuImage.css("display", "none");
-        $('body').css("overflow", "auto");
+        //$('body').css("overflow", "auto");
         setTimeout(function() {
             menu.css("pointer-events", "none");
             menu.css("z-index", "50");
@@ -21,7 +21,7 @@ navBtn.click(function() {
         navBtn.css("transform", "rotate(180deg)");
         menu.css("opacity", "1");
         menuImage.css("display", "inline-block");
-        $('body').css("overflow", "hidden");
+        //$('body').css("overflow", "hidden");
         setTimeout(function() {
             menu.css("pointer-events", "auto");
             menu.css("z-index", "auto");

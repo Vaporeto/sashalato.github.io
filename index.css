@@ -5,7 +5,7 @@
     --white: #ffffff;
     --black: #000000;
     /* Sizes */
-    --heading: 3.4rem;
+    --heading: 3rem;
     --heading-large: 6rem;
     --heading-medium: 2rem;
     --paragraph: 1.1rem;
@@ -25,12 +25,10 @@
     font-family: var(--font-main);
     -webkit-font-smoothing: antialiased;
     scroll-behavior: smooth;
-    max-height: 90vh;
+    max-height: 100vh;
     margin: 0 auto;
   }
-  main {
-     /* height: 100vh; */
-  }
+
   h1 {
     margin: 0;
     font-size: var(--heading);
@@ -185,7 +183,7 @@
   /* Header */
   #header {
     width: 100%;
-    height: 80vh;
+    height: 100vh;
     position: relative;
     overflow: hidden;
   }
@@ -244,7 +242,7 @@
   .menu {
     top: calc(5em);
     width: calc(75% - 5em);
-    height: calc(100vh - 5em);
+    height: calc(90vh - 5em);
     padding: 0;
     position: relative;
     list-style-type: none;
@@ -359,6 +357,11 @@
       /* Sizes */
       --heading: 3rem;
     }
+    .menu-item-inner {
+      font-size: calc(var(--heading-large) - 2.5rem);
+      line-height: 1em;
+      margin-top: 2rem;
+    }
   }
   @media only screen and (max-width: 1456px) {
     :root {
@@ -370,8 +373,9 @@
       margin: 1.5em 0;
     }
     .menu-item-inner {
-      font-size: calc(var(--heading-large) - 1.5rem);
+      font-size: calc(var(--heading-large) - 2.5rem);
       line-height: 1em;
+      margin-top: 2rem;
     }
   }
   @media only screen and (max-width: 1220px) {
