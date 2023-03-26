@@ -1,0 +1,7 @@
+/* Header */
+.header-title {
+    font-size: calc(var(--heading-large) - 3.75rem);
+  }
+  .header-wrapper {
+    width: 70%;
+  }

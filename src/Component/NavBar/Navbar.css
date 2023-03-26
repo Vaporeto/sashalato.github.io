@@ -1,0 +1,22 @@
+/* Navbar */
+#navbar {
+    top: 2em;
+    width: 100%;
+    height: 5em;
+    position: absolute;
+    z-index: 80;
+  }
+  .navbar-inner {
+    width: calc(95% - 5em);
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .navbar-left {
+    height: 100%;
+    position: relative;
+  }
+  .navbar-right p {
+    font-weight: 200;
+    color: var(--white);
+  }
