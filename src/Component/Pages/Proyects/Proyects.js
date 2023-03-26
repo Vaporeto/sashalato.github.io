@@ -9,9 +9,15 @@ import { useTheme } from '@mui/material/styles';
 import React from 'react';
 import Typography from '@mui/material/Typography';
 
-import { Slide } from 'react-slideshow-image';
-import { Zoom } from 'react-slideshow-image';
-import 'react-slideshow-image/dist/styles.css';
+import img1 from '../../../Assets/Proyect1/7U6A0621.jpg';
+import img2 from '../../../Assets/Proyect1/7U6A0622.jpg';
+import img3 from '../../../Assets/Proyect1/7U6A0627.jpg';
+import img4 from '../../../Assets/Proyect1/7U6A0646.jpg';
+import img5 from '../../../Assets/Proyect1/7U6A0653.jpg';
+import img6 from '../../../Assets/Proyect1/7U6A0658.jpg';
+import img7 from '../../../Assets/Proyect1/7U6A0689.jpg';
+import img8 from '../../../Assets/Proyect1/BeFunky-photo1.jpg';
+import img9 from '../../../Assets/Proyect1/IMG_8069.jpg';
 
 
 function TabPanel(props) {
@@ -92,7 +98,7 @@ function Proyects() {
 
         <Box sx={{ width: "100%", height: "100vh", overflowY: 'scroll', padding: "100px" }}>
 
-            {/* <Box sx={{ bgcolor: 'Black' }}>
+            <Box sx={{ bgcolor: 'Black' }}>
                 <StyledTabs
                 value={value}
                 onChange={handleChange}
@@ -110,23 +116,23 @@ function Proyects() {
                 onChangeIndex={handleChangeIndex}
             >
                 <TabPanel value={value} index={0} dir={theme.direction}>
-                    <ImageList variant="masonry" cols={3} gap={8}>
+                    <ImageList variant="masonry" cols={3} gap={20}>
                     {itemData.map((item) => (
-                        <ImageListItem key={item.img}>
-                        <img
-                            src={`${item.img}?w=248&fit=crop&auto=format`}
-                            srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                            alt={item.title}
-                            loading="lazy"
-                        />
+                        <ImageListItem key={item.img} sx={{marginBottom:"1rem"}}>
+                            <img
+                                src={`${item.img}?w=248&fit=crop&auto=format`}
+                                srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                                alt={item.title}
+                                loading="lazy"
+                            />
                         </ImageListItem>
                     ))}
                     </ImageList>
                 </TabPanel>
                 <TabPanel value={value} index={1} dir={theme.direction}>
-                    <ImageList variant="masonry" cols={3} gap={8}>
+                    <ImageList variant="masonry" cols={3} gap={20}>
                     {itemData2.map((item) => (
-                        <ImageListItem key={item.img}>
+                        <ImageListItem key={item.img} sx={{marginBottom:"1rem"}}>
                             <img
                                 src={`${item.img}?w=248&fit=crop&auto=format`}
                                 srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
@@ -138,9 +144,9 @@ function Proyects() {
                     </ImageList>
                 </TabPanel>
                 <TabPanel value={value} index={2} dir={theme.direction}>
-                    <ImageList variant="masonry" cols={3} gap={8}>
+                    <ImageList variant="masonry" cols={3} gap={20}>
                     {itemData3.map((item) => (
-                        <ImageListItem key={item.img}>
+                        <ImageListItem key={item.img} sx={{marginBottom:"1rem"}}>
                         <img
                             src={`${item.img}?w=248&fit=crop&auto=format`}
                             srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
@@ -151,46 +157,8 @@ function Proyects() {
                     ))}
                     </ImageList>
                 </TabPanel>
-            </SwipeableViews> */}
+            </SwipeableViews>
            
-           <Zoom scale={1.4} indicators={true}>
-           <ImageList variant="masonry" cols={3} gap={8}>
-                    {itemData.map((item) => (
-                        <ImageListItem key={item.img}>
-                        <img
-                            src={`${item.img}?w=248&fit=crop&auto=format`}
-                            srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                            alt={item.title}
-                            loading="lazy"
-                        />
-                        </ImageListItem>
-                    ))}
-                    </ImageList>
-                    <ImageList variant="masonry" cols={3} gap={8}>
-                    {itemData2.map((item) => (
-                        <ImageListItem key={item.img}>
-                        <img
-                            src={`${item.img}?w=248&fit=crop&auto=format`}
-                            srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                            alt={item.title}
-                            loading="lazy"
-                        />
-                        </ImageListItem>
-                    ))}
-                    </ImageList>
-                    <ImageList variant="masonry" cols={3} gap={8}>
-                    {itemData3.map((item) => (
-                        <ImageListItem key={item.img}>
-                        <img
-                            src={`${item.img}?w=248&fit=crop&auto=format`}
-                            srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                            alt={item.title}
-                            loading="lazy"
-                        />
-                        </ImageListItem>
-                    ))}
-                    </ImageList>
-        </Zoom>
        </Box>
 
     );
@@ -214,28 +182,40 @@ const images = [
 
 const itemData = [
     {
-      img: 'https://images.unsplash.com/photo-1549388604-817d15aa0110',
-      title: 'Bed',
+      img: `${img1}`,
+      title: 'Image1',
     },
     {
-      img: 'https://images.unsplash.com/photo-1525097487452-6278ff080c31',
-      title: 'Books',
+      img:  `${img2}`,
+      title: 'Image2',
     },
     {
-      img: 'https://images.unsplash.com/photo-1523413651479-597eb2da0ad6',
-      title: 'Sink',
+      img:  `${img3}`,
+      title: 'Image3',
     },
     {
-      img: 'https://images.unsplash.com/photo-1563298723-dcfebaa392e3',
-      title: 'Kitchen',
+      img:  `${img4}`,
+      title: 'Image4',
     },
     {
-      img: 'https://images.unsplash.com/photo-1588436706487-9d55d73a39e3',
-      title: 'Blinds',
+      img:  `${img5}`,
+      title: 'Image5',
     },
     {
-      img: 'https://images.unsplash.com/photo-1574180045827-681f8a1a9622',
-      title: 'Chairs',
+      img:  `${img6}`,
+      title: 'Image6',
+    },
+    {
+      img:  `${img7}`,
+      title: 'Image7',
+    },
+    {
+      img:  `${img8}`,
+      title: 'Image8',
+    },
+    {
+      img:  `${img9}`,
+      title: 'Image9',
     },
   ];
   const itemData2 = [
