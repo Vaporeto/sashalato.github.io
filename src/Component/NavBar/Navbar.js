@@ -2,6 +2,8 @@ import Menu from '../MenuImage/Menu';
 import './Navbar.css';
 import React, { useRef, useState } from "react";
 import { Link } from 'react-router-dom';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
 function Navbar(){
 
@@ -10,8 +12,18 @@ function Navbar(){
     const menuItem3 = useRef(null);
     const menuItem4 = useRef(null);
 
+    const theme = useTheme();
+    // Consultas de medios para diferentes tamaños de pantalla
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm')); // Pantallas pequeñas
+    const isMediumScreen = useMediaQuery(theme.breakpoints.between('md', 'lg')); // Pantallas medianas
+    const isLargeScreen = useMediaQuery(theme.breakpoints.up('xl')); // Pantallas grandes
+   
+    // Número de columnas para diferentes tamaños de pantalla
+    const imageValid = isSmallScreen ? false : (isMediumScreen ? true : (isLargeScreen ? true : true));
+
     const handleMenuItem1Enter = () => {
-        if (!isOpen){
+        console.log(imageValid, isSmallScreen, isMediumScreen, isLargeScreen)
+        if (!isOpen && imageValid){
             document.querySelector('#m-img-1').style.opacity = '1';
             menuItem2.current.style.opacity = ".12";
             menuItem3.current.style.opacity = ".12";
@@ -20,16 +32,17 @@ function Navbar(){
       };
     
       const handleMenuItem1Leave = () => {
-        
+        if(imageValid){
             document.querySelector('#m-img-1').style.opacity = "0";
             menuItem2.current.style.opacity = "1";
             menuItem3.current.style.opacity = "1";
             menuItem4.current.style.opacity = "1";
+        }
         
       };
     
       const handleMenuItem2Enter = () => {
-        if (!isOpen){
+        if (!isOpen && imageValid){
             document.querySelector('#m-img-2').style.opacity = "1";
             menuItem1.current.style.opacity = ".12";
             menuItem3.current.style.opacity = ".12";
@@ -38,16 +51,17 @@ function Navbar(){
       };
     
       const handleMenuItem2Leave = () => {
-        
+        if (imageValid){
             document.querySelector('#m-img-2').style.opacity = "0";
             menuItem1.current.style.opacity = "1";
             menuItem3.current.style.opacity = "1";
             menuItem4.current.style.opacity = "1";
+        }
         
       };
     
       const handleMenuItem3Enter = () => {
-        if (!isOpen){
+        if (!isOpen && imageValid){
             document.querySelector('#m-img-3').style.opacity = "1";
             menuItem1.current.style.opacity = ".12";
             menuItem2.current.style.opacity = ".12";
@@ -56,16 +70,17 @@ function Navbar(){
       };
     
       const handleMenuItem3Leave = () => {
-        
+        if (imageValid){
             document.querySelector('#m-img-3').style.opacity = "0";
             menuItem1.current.style.opacity = "1";
             menuItem2.current.style.opacity = "1";
             menuItem4.current.style.opacity = "1";
+        }
         
       };
     
       const handleMenuItem4Enter = () => {
-        if (!isOpen){
+        if (!isOpen && imageValid){
             document.querySelector('#m-img-4').style.opacity = "1";
             menuItem1.current.style.opacity = ".12";
             menuItem2.current.style.opacity = ".12";
@@ -74,11 +89,12 @@ function Navbar(){
       };
     
       const handleMenuItem4Leave = () => {
-       
+        if (imageValid){
             document.querySelector('#m-img-4').style.opacity = "0";
             menuItem1.current.style.opacity = "1";
             menuItem2.current.style.opacity = "1";
             menuItem3.current.style.opacity = "1";
+        }
         
       };
 
@@ -138,7 +154,7 @@ function Navbar(){
          style={{
             opacity: !isOpen ? '1' : '0',
             pointerEvents: !isOpen ? 'auto' : 'none',
-            zIndex: !isOpen ? 'auto' : '50',
+            zIndex: !isOpen ? '5' : 'auto',
           }}>
 
             {/* <!-- Menu Right --> */}

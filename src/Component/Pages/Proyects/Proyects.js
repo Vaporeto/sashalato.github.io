@@ -1,3 +1,4 @@
+import './Proyects.css';
 import ImageList from '@mui/material/ImageList';
 import { styled } from '@mui/material/styles';
 import Tabs from '@mui/material/Tabs';
@@ -7,17 +8,8 @@ import SwipeableViews from 'react-swipeable-views-react-18-fix';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
 import React from 'react';
-import Typography from '@mui/material/Typography';
-
-import img1 from '../../../Assets/Proyect1/7U6A0621.jpg';
-import img2 from '../../../Assets/Proyect1/7U6A0622.jpg';
-import img3 from '../../../Assets/Proyect1/7U6A0627.jpg';
-import img4 from '../../../Assets/Proyect1/7U6A0646.jpg';
-import img5 from '../../../Assets/Proyect1/7U6A0653.jpg';
-import img6 from '../../../Assets/Proyect1/7U6A0658.jpg';
-import img7 from '../../../Assets/Proyect1/7U6A0689.jpg';
-import img8 from '../../../Assets/Proyect1/BeFunky-photo1.jpg';
-import img9 from '../../../Assets/Proyect1/IMG_8069.jpg';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import ImageViewer from "react-simple-image-viewer";
 
 
 function TabPanel(props) {
@@ -33,7 +25,7 @@ function TabPanel(props) {
       >
         {value === index && (
           <Box sx={{ p: 3 }}>
-            <Typography>{children}</Typography>
+            {children}
           </Box>
         )}
       </div>
@@ -83,9 +75,20 @@ function Proyects() {
         },
     }),
     );
-
     const theme = useTheme();
   const [value, setValue] = React.useState(0);
+  // Consultas de medios para diferentes tamaños de pantalla
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm')); // Pantallas pequeñas
+  const isMediumScreen = useMediaQuery(theme.breakpoints.between('md', 'lg')); // Pantallas medianas
+  const isLargeScreen = useMediaQuery(theme.breakpoints.up('xl')); // Pantallas grandes
+
+  // Número de columnas para diferentes tamaños de pantalla
+  const cols = isSmallScreen ? 2 : (isMediumScreen ? 3 : (isLargeScreen ? 3 : 3));
+
+  const proyect1 = importAll(require.context('../../../Assets/Proyect1/', false, /\.(png|jpe?g|svg)$/));
+  const proyect2 = importAll(require.context('../../../Assets/Proyect2/', false, /\.(png|jpe?g|svg)$/));
+  const proyect3 = importAll(require.context('../../../Assets/Proyect3/', false, /\.(png|jpe?g|svg)$/));
+
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -94,77 +97,110 @@ function Proyects() {
   const handleChangeIndex = (index) => {
     setValue(index);
   };
-    return (
 
-        <Box sx={{ width: "100%", height: "100vh", overflowY: 'scroll', padding: "100px" }}>
+  const openImageViewer = React.useCallback((index) => {
+    setCurrentImage(index);
+    setIsViewerOpen(true);
+  }, []);
 
-            <Box sx={{ bgcolor: 'Black' }}>
-                <StyledTabs
-                value={value}
-                onChange={handleChange}
-                aria-label="styled tabs example"
-                >
-                <StyledTab label="Workflows" {...a11yProps(0)} />
-                <StyledTab label="Datasets" {...a11yProps(0)} />
-                <StyledTab label="Connections" {...a11yProps(0)} />
-                </StyledTabs>
-                
-            </Box>
-            <SwipeableViews
-                axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-                index={value}
-                onChangeIndex={handleChangeIndex}
-            >
-                <TabPanel value={value} index={0} dir={theme.direction}>
-                    <ImageList variant="masonry" cols={3} gap={20}>
-                    {itemData.map((item) => (
-                        <ImageListItem key={item.img} sx={{marginBottom:"1rem"}}>
-                            <img
-                                src={`${item.img}?w=248&fit=crop&auto=format`}
-                                srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                                alt={item.title}
-                                loading="lazy"
-                            />
-                        </ImageListItem>
-                    ))}
-                    </ImageList>
-                </TabPanel>
-                <TabPanel value={value} index={1} dir={theme.direction}>
-                    <ImageList variant="masonry" cols={3} gap={20}>
-                    {itemData2.map((item) => (
-                        <ImageListItem key={item.img} sx={{marginBottom:"1rem"}}>
-                            <img
-                                src={`${item.img}?w=248&fit=crop&auto=format`}
-                                srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                                alt={item.title}
-                                loading="lazy"
-                            />
-                        </ImageListItem>
-                    ))}
-                    </ImageList>
-                </TabPanel>
-                <TabPanel value={value} index={2} dir={theme.direction}>
-                    <ImageList variant="masonry" cols={3} gap={20}>
-                    {itemData3.map((item) => (
-                        <ImageListItem key={item.img} sx={{marginBottom:"1rem"}}>
-                        <img
-                            src={`${item.img}?w=248&fit=crop&auto=format`}
-                            srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                            alt={item.title}
-                            loading="lazy"
-                        />
-                        </ImageListItem>
-                    ))}
-                    </ImageList>
-                </TabPanel>
-            </SwipeableViews>
-           
-       </Box>
+  const closeImageViewer = () => {
+    setCurrentImage(0);
+    setIsViewerOpen(false);
+  };
+  const [currentImage, setCurrentImage] = React.useState(0);
+  const [isViewerOpen, setIsViewerOpen] = React.useState(false);
+  
+  return (
 
+    
+ <>
+ <Box sx={{ bgcolor: 'var(--bc-dark)', paddingTop:'8rem' }}>
+ <StyledTabs
+ value={value}
+ onChange={handleChange}
+ aria-label="styled tabs example"
+ >
+ <StyledTab key="1" label="Workflows" {...a11yProps(0)} />
+ <StyledTab key="2" label="Datasets" {...a11yProps(0)} />
+ <StyledTab key="3" label="Connections" {...a11yProps(0)} />
+ </StyledTabs>
+ 
+</Box>
+<SwipeableViews
+         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+         index={value}
+         onChangeIndex={handleChangeIndex}
+         sx={{paddingTop:"5rem"}}
+     >
+ <TabPanel value={value} index={0} dir={theme.direction}>
+             <ImageList variant="masonry" cols={cols} gap={20}>
+             {proyect1.map((item, index) => (
+                 <ImageListItem key={item} sx={{marginBottom:"1rem"}}>
+                     <img
+                         src={`${item}?w=248&fit=crop&auto=format`}
+                         srcSet={`${item}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                         alt={index}
+                         onClick={() => openImageViewer(index)}
+                         loading="lazy"
+                     />
+                 </ImageListItem>
+             ))}
+             </ImageList>
+         </TabPanel>
+         <TabPanel value={value} index={1} dir={theme.direction}>
+             <ImageList variant="masonry" cols={cols} gap={20}>
+             {proyect2.map((item, index) => (
+                 <ImageListItem key={item} sx={{marginBottom:"1rem"}}>
+                     <img
+                         src={`${item}?w=248&fit=crop&auto=format`}
+                         srcSet={`${item}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                         alt={index}
+                         onClick={() => openImageViewer(index)}
+                         loading="lazy"
+                     />
+                 </ImageListItem>
+             ))}
+             </ImageList>
+         </TabPanel>
+         <TabPanel value={value} index={2} dir={theme.direction}>
+             <ImageList variant="masonry" cols={cols} gap={20}>
+             {proyect3.map((item, index) => (
+                 <ImageListItem key={item} sx={{marginBottom:"1rem"}}>
+                     <img
+                         src={`${item}?w=248&fit=crop&auto=format`}
+                         srcSet={`${item}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                         alt={index}
+                         onClick={() => openImageViewer(index)}
+                         loading="lazy"
+                     />
+                 </ImageListItem>
+             ))}
+             </ImageList>
+         </TabPanel>
+ </SwipeableViews>
+ {isViewerOpen && (
+        <ImageViewer
+          src={images}
+          currentIndex={currentImage}
+          onClose={closeImageViewer}
+          disableScroll={true}
+          backgroundStyle={{
+            backgroundColor: "rgba(0,0,0,0.9)"
+          }}
+          closeOnClickOutside={true}
+          sx={{ zIndex:'200'}}
+        />
+      )}
+ </>
     );
 }
 
 export default Proyects;
+
+function importAll(r) {
+  return r.keys().map(r);
+}
+
 const buttonStyle = {
     width: "30px",
     background: 'none',
@@ -180,44 +216,6 @@ const images = [
     "https://images.unsplash.com/photo-1536987333706-fc9adfb10d91?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
 ];
 
-const itemData = [
-    {
-      img: `${img1}`,
-      title: 'Image1',
-    },
-    {
-      img:  `${img2}`,
-      title: 'Image2',
-    },
-    {
-      img:  `${img3}`,
-      title: 'Image3',
-    },
-    {
-      img:  `${img4}`,
-      title: 'Image4',
-    },
-    {
-      img:  `${img5}`,
-      title: 'Image5',
-    },
-    {
-      img:  `${img6}`,
-      title: 'Image6',
-    },
-    {
-      img:  `${img7}`,
-      title: 'Image7',
-    },
-    {
-      img:  `${img8}`,
-      title: 'Image8',
-    },
-    {
-      img:  `${img9}`,
-      title: 'Image9',
-    },
-  ];
   const itemData2 = [
     {
       img: 'https://images.unsplash.com/photo-1549388604-817d15aa0110',
