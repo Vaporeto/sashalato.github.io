@@ -89,6 +89,9 @@ function Proyects() {
   const proyect2 = importAll(require.context('../../../Assets/Proyect2/', false, /\.(png|jpe?g|svg)$/));
   const proyect3 = importAll(require.context('../../../Assets/Proyect3/', false, /\.(png|jpe?g|svg)$/));
 
+  const [currentImage, setCurrentImage] = React.useState(0);
+  const [isViewerOpen, setIsViewerOpen] = React.useState(false);
+  const [currentProyect, setCurrentProyect] = React.useState(1);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -98,17 +101,17 @@ function Proyects() {
     setValue(index);
   };
 
-  const openImageViewer = React.useCallback((index) => {
+  const openImageViewer = React.useCallback((index, proyect) => {
     setCurrentImage(index);
     setIsViewerOpen(true);
+    setCurrentProyect(proyect);
   }, []);
 
   const closeImageViewer = () => {
     setCurrentImage(0);
     setIsViewerOpen(false);
   };
-  const [currentImage, setCurrentImage] = React.useState(0);
-  const [isViewerOpen, setIsViewerOpen] = React.useState(false);
+  
   
   return (
 
@@ -140,7 +143,7 @@ function Proyects() {
                          src={`${item}?w=248&fit=crop&auto=format`}
                          srcSet={`${item}?w=248&fit=crop&auto=format&dpr=2 2x`}
                          alt={index}
-                         onClick={() => openImageViewer(index)}
+                         onClick={() => openImageViewer(index, proyect1)}
                          loading="lazy"
                      />
                  </ImageListItem>
@@ -155,7 +158,7 @@ function Proyects() {
                          src={`${item}?w=248&fit=crop&auto=format`}
                          srcSet={`${item}?w=248&fit=crop&auto=format&dpr=2 2x`}
                          alt={index}
-                         onClick={() => openImageViewer(index)}
+                         onClick={() => openImageViewer(index, proyect2)}
                          loading="lazy"
                      />
                  </ImageListItem>
@@ -170,7 +173,7 @@ function Proyects() {
                          src={`${item}?w=248&fit=crop&auto=format`}
                          srcSet={`${item}?w=248&fit=crop&auto=format&dpr=2 2x`}
                          alt={index}
-                         onClick={() => openImageViewer(index)}
+                         onClick={() => openImageViewer(index, proyect3)}
                          loading="lazy"
                      />
                  </ImageListItem>
@@ -180,7 +183,7 @@ function Proyects() {
  </SwipeableViews>
  {isViewerOpen && (
         <ImageViewer
-          src={images}
+          src={currentProyect}
           currentIndex={currentImage}
           onClose={closeImageViewer}
           disableScroll={true}
